@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 // Controllers (route handlers)
 import * as homeController from "./controllers/home";
-// import * as authController from "./controllers/auth";
+import * as authController from "./controllers/auth";
 
 // Initialize configuration
 dotenv.config();
@@ -22,11 +22,9 @@ app.use(logger("dev"));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-/**
- * Primary app routes.
- */
+// Primary app routes.
 app.get("/", homeController.index);
-app.post("/login", (req, res) => res.json("da"));
+app.post("/login", authController.login);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));

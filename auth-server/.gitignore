@@ -3,6 +3,8 @@ node_modules
 
 # API keys and secrets
 .env
+auth.key
+auth.key.pub
 
 # Ignore build ts files
 dist/**/*
