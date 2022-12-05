@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/core/auth": ["libs/core/auth/src/index.ts"]
+      "@app/core/auth": ["libs/core/auth/src/index.ts"],
+      "@app/home": ["libs/home/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
