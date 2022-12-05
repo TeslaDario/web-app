@@ -1,0 +1,9 @@
+# Dependency directory
+node_modules
+
+# API keys and secrets
+.env
+
+# Ignore build ts files
+dist/**/*
+

@@ -1,0 +1,49 @@
+{
+  "name": "auth-server",
+  "version": "1.0.0",
+  "description": "Auth server built in Node.js express with TypeScript",
+  "main": "server.js",
+  "homepage": "https://github.com/TeslaDario",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeslaDario"
+  },
+  "author": {
+    "name": "Dario Dragisic",
+    "email": "dado.dsa@gmail.com",
+    "phone-BA": "+387 (0)65 360 160",
+    "phone-DE": "+49 (0)1512 203 2684",
+    "url": "https://www.linkedin.com/in/dario-dragisic"
+  },
+  "private": true,
+  "scripts": {
+    "serve": "tsc && node dist/server.js",
+    "serve-dev": "nodemon --watch \"*.ts\" --exec \"ts-node\" ./src/server.ts",
+    "start": "npm run serve-dev",
+    "start-prod": "npm run build-prod && node dist/server.js",
+    "build": "npm run clean && tsc",
+    "build-prod": "npm run bundle-prod && npm i --prod --prefix build/",
+    "bundle-prod": "npm run clean && tsc && npm run copy",
+    "copy": "cp package.json dist/ && cp .env dist/",
+    "clean": "rimraf dist/*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/http-errors": "^2.0.1",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^18.11.10",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  }
+}

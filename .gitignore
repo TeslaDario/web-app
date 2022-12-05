@@ -1,0 +1,7 @@
+# OS metadata
+.DS_Store
+Thumb.db
+
+# Global custom docs and todo files
+/[docs]*.md
+/[todo]*.md
