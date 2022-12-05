@@ -26,6 +26,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
  * Primary app routes.
  */
 app.get("/", homeController.index);
+app.post("/login", (req, res) => res.json("da"));
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
