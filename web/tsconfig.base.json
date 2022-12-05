@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@app/core/auth": ["libs/core/auth/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
