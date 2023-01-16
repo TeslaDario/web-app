@@ -7,7 +7,7 @@ import { AppRoutes } from './app.routes';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutes, AuthModule],
+  imports: [BrowserModule, AuthModule, AppRoutes],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -23,22 +23,26 @@
     "start": "npm run serve-dev",
     "start-prod": "npm run build-prod && node dist/server.js",
     "build": "npm run clean && tsc",
-    "build-prod": "npm run bundle-prod && npm i --prod --prefix build/",
+    "build-prod": "npm run bundle-prod && npm i --prod --prefix dist/",
     "bundle-prod": "npm run clean && tsc && npm run copy",
-    "copy": "cp package.json dist/ && cp .env dist/",
+    "copy": "cp package.json dist/ && cp .env dist/ && cp -r src/public/ dist/",
     "clean": "rimraf dist/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@types/redis": "^4.0.11",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-jwt": "^7.7.7",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "redis": "^4.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
+    "@types/express-jwt": "^7.4.2",
     "@types/http-errors": "^2.0.1",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.3",

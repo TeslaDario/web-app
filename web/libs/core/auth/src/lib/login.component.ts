@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -21,8 +23,8 @@ import { AuthService } from './auth.service';
       <div class="form-buttons">
         <button
           class="button button-primary"
-          [disabled]="!form.valid"
-          (click)="login()"
+          [disabled]="!form.valid || loading"
+          (click)="submit()"
         >
           Login
         </button>
@@ -32,6 +34,7 @@ import { AuthService } from './auth.service';
 })
 export class LoginComponent {
   form: FormGroup;
+  loading!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -44,14 +47,32 @@ export class LoginComponent {
     });
   }
 
-  login(): void {
-    const { email, password } = this.form.value;
-
-    if (email && password) {
-      this.authService.login(email, password).subscribe(() => {
-        console.log('User is logged in');
-        this.router.navigateByUrl('/');
-      });
+  submit(): void {
+    if (!this.form.valid || this.loading) {
+      return;
     }
+
+    const { email, password } = this.form.value;
+    this.loading = true;
+
+    this.authService
+      .login(email, password)
+      .pipe(catchError(async (err) => this.handleError(err)))
+      .subscribe((res) => {
+        this.loading = false;
+        if (res?.token) {
+          this.router.navigate(['/'], { replaceUrl: true });
+        }
+      });
+  }
+
+  private handleError(err: HttpErrorResponse): void {
+    if (err.status === 304) {
+      this.router.navigate(['/'], { replaceUrl: true });
+      return;
+    }
+
+    alert(`Error: ${err.status}: ${err.statusText}`);
+    this.loading = false;
   }
 }

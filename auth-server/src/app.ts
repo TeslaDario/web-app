@@ -3,13 +3,15 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import path from "path";
 import logger from "morgan";
 import dotenv from "dotenv";
+import { redisInit } from "./config/redis";
 
-// Controllers (route handlers)
-import * as homeController from "./controllers/home";
-import * as authController from "./controllers/auth";
+// Route handlers
+import AuthRouter from "./routes/auth";
 
 // Initialize configuration
 dotenv.config();
+// Initialize redis
+redisInit();
 
 // Create Express server
 const app: Application = express();
@@ -21,10 +23,14 @@ app.set("view engine", "pug");
 app.use(logger("dev"));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.static(path.join(__dirname, "/public", "app")));
 
-// Primary app routes.
-app.get("/", homeController.index);
-app.post("/login", authController.login);
+const handleStaticPage = (req: Request, res: Response) =>
+  res.sendFile(path.join(__dirname, "/public/app/index.html"));
+
+// Primary app routes
+app.use("/auth", AuthRouter);
+app.get("/*", handleStaticPage);
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));

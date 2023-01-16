@@ -2,6 +2,9 @@
 .DS_Store
 Thumb.db
 
+# IDE - VSCode
+/.vscode/*
+
 # Global custom docs and todo files
 /[docs]*.md
 /[todo]*.md

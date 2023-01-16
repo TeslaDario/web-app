@@ -7,6 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js",
     "start": "nx serve",
     "build": "nx build",
+    "build-prod": "npm run build && npm run copy",
+    "copy": "rimraf ../auth-server/src/public/ && cp -r dist/apps/  ../auth-server/src/public/",
     "test": "nx test"
   },
   "private": true,
@@ -20,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~15.0.0",
     "@angular/router": "~15.0.0",
     "@nrwl/angular": "15.2.4",
+    "ngx-auto-unsubscribe-decorator": "^1.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

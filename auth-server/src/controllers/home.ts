@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import path from "path";
 
 /**
  * Home page.
@@ -9,5 +10,7 @@ export const index = (req: Request, res: Response) => {
   //     title: "Home",
   //   });
   // todo create index login page
-  res.send("index - todo create index login page");
+  // res.send("index - todo create index login page");
+  console.log(path.normalize(__dirname + "/../"));
+  res.sendFile(path.normalize(__dirname + "/../"));
 };
